@@ -81,7 +81,7 @@ export function ShoppingCart({
                     <div className="flex justify-between items-start">
                       <div>
                         <h4 className="font-medium text-foreground">
-                          Vitality {item.modelName}
+                          SORGEN {item.modelName}
                         </h4>
                         <p className="text-sm text-muted-foreground">
                           {formatPrice(item.modelPrice)}

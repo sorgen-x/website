@@ -1,5 +1,5 @@
 import { Sparkles } from "lucide-react";
-import productGallery from "@/assets/product-gallery.png";
+import productExterior from "@/assets/product-exterior.png";
 import productInterior from "@/assets/product-interior.png";
 import { aiValuePoints, specs } from "./data";
 
@@ -26,8 +26,8 @@ export function ConfigPreview({ previewTab, onPreviewTabChange, isVisible }: Con
       <div className="rounded-[2rem] overflow-hidden bg-gradient-subtle shadow-sm">
         <div className="relative aspect-[16/10]">
           <img
-            src={previewTab === "exterior" ? productGallery : productInterior}
-            alt={previewTab === "exterior" ? "Vitality 外观全景" : "Vitality 砂金内饰"}
+            src={previewTab === "exterior" ? productExterior : productInterior}
+            alt={previewTab === "exterior" ? "Aether 外观" : "Aether 内舱"}
             className="w-full h-full object-cover transition-opacity duration-500"
             loading="lazy"
           />
@@ -54,7 +54,7 @@ export function ConfigPreview({ previewTab, onPreviewTabChange, isVisible }: Con
       <div className="mt-6 p-6 bg-background rounded-2xl border border-border/50">
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="w-4 h-4 text-primary" />
-          <h4 className="text-sm font-medium text-foreground">小元 · 你的家庭健康管家</h4>
+          <h4 className="text-sm font-medium text-foreground">小元 · 舱内智能助手</h4>
         </div>
         <div className="space-y-3">
           {aiValuePoints.map((p) => (

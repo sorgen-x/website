@@ -27,7 +27,7 @@ const products = [
   {
     id: "app" as ProductType,
     icon: Smartphone,
-    title: "Vitality App",
+    title: "SORGEN App",
     subtitle: "每日健康管理移动端",
     description: "把复杂的健康管理，拆解成每天的小任务。",
     features: [

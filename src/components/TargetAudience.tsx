@@ -30,7 +30,7 @@ const scenarios = [
 ];
 
 const principles = [
-  "比症状早 48 小时预警",
+  "个人基线持续对照",
   "四维修复自动执行",
   "全家共享健康守护",
   "数据安全本地加密",
@@ -96,7 +96,7 @@ export function TargetAudience() {
         {/* Principles */}
         <div className={`text-center stagger-item ${isVisible ? 'stagger-visible' : ''}`} style={{ transitionDelay: '0.8s' }}>
           <h3 className="text-2xl font-semibold text-foreground mb-8">
-            Vitality 承诺
+            SORGEN 承诺
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {principles.map((principle, index) => (

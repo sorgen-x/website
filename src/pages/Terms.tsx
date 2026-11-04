@@ -27,14 +27,14 @@ export default function Terms() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">1. 服务条款</h2>
             <p>
-              欢迎使用 Vitality 服务。本服务由深圳溯元求索智能科技有限公司（简称“溯元”）提供。使用我们的服务即表示您同意遵守本用户协议。请仔细阅读以下条款。
+              欢迎使用 SORGEN 服务。本服务由深圳溯元求索智能科技有限公司（简称“溯元”）提供。使用我们的服务即表示您同意遵守本用户协议。请仔细阅读以下条款。
             </p>
           </section>
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">2. 服务内容</h2>
             <p>
-              Vitality提供健康管理相关的产品和服务，包括但不限于：
+              SORGEN提供健康管理相关的产品和服务，包括但不限于：
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li>恢复舱设备及相关服务</li>
@@ -60,14 +60,14 @@ export default function Terms() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">4. 免责声明</h2>
             <p>
-              Vitality提供的健康建议仅供参考，不能替代专业医疗诊断和治疗。如有健康问题，请及时就医。
+              SORGEN提供的健康建议仅供参考，不能替代专业医疗诊断和治疗。如有健康问题，请及时就医。
             </p>
           </section>
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">5. 知识产权</h2>
             <p>
-              Vitality的所有内容、商标和技术均受知识产权法保护。未经授权，不得复制、修改或分发。
+              SORGEN的所有内容、商标和技术均受知识产权法保护。未经授权，不得复制、修改或分发。
             </p>
           </section>
 
@@ -84,7 +84,7 @@ export default function Terms() {
               如果您对本用户协议有任何疑问，请通过以下方式联系我们：
             </p>
             <p>公司：深圳溯元求索智能科技有限公司</p>
-            <p>邮箱：support@suyuan.com</p>
+            <p>邮箱：support@sorgenx.com</p>
           </section>
         </div>
       </main>

@@ -7,10 +7,8 @@ interface SummaryStepProps {
   totalPrice: number;
 }
 
-const formatPrice = (price: number) => `¥${price.toLocaleString()}`;
-
 export const SummaryStep = forwardRef<HTMLDivElement, SummaryStepProps>(
-  ({ model, addons, totalPrice }, ref) => {
+  ({ model, addons }, ref) => {
     const hasAddons = addons.length > 0;
     return (
       <div ref={ref} className="p-6 rounded-2xl bg-background border border-border/50 scroll-mt-32">
@@ -20,7 +18,7 @@ export const SummaryStep = forwardRef<HTMLDivElement, SummaryStepProps>(
             <p className="text-sm text-muted-foreground">已选配置</p>
             <p className="font-medium text-foreground">{model.name}</p>
           </div>
-          <p className="text-lg font-medium text-foreground">{model.priceDisplay}</p>
+          <p className="text-sm font-medium text-muted-foreground">{model.priceDisplay}</p>
         </div>
 
         {hasAddons && (
@@ -35,8 +33,8 @@ export const SummaryStep = forwardRef<HTMLDivElement, SummaryStepProps>(
         )}
 
         <div className={`flex justify-between items-center ${hasAddons ? "pt-4 border-t border-border/50" : ""}`}>
-          <span className="text-sm text-muted-foreground">总价</span>
-          <p className="text-2xl font-semibold text-primary">{formatPrice(totalPrice)}</p>
+          <span className="text-sm text-muted-foreground">下一步</span>
+          <p className="text-lg font-semibold text-primary">预约咨询报价</p>
         </div>
       </div>
     );

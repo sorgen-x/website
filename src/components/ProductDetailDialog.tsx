@@ -33,7 +33,7 @@ export function ProductDetailDialog({ open, onOpenChange, productType }: Product
       <div className="space-y-6">
         <h4 className="text-xl font-semibold text-foreground">小元是什么？</h4>
         <p className="text-muted-foreground leading-relaxed">
-          小元，是Vitality居家健康管理系统中的<span className="text-foreground font-medium">核心智能助手</span>。
+          小元，是SORGEN 居家健康管理系统中的<span className="text-foreground font-medium">核心智能助手</span>。
           它并不是一个"随便聊天的 AI"，而是围绕健康管理场景设计的<span className="text-foreground font-medium">长期陪伴型智能系统</span>。
         </p>
         <p className="text-foreground font-medium">小元的目标只有一个：让健康管理真正落地到每天的生活中。</p>
@@ -143,13 +143,13 @@ export function ProductDetailDialog({ open, onOpenChange, productType }: Product
         <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
           <Smartphone className="w-8 h-8 text-primary" />
         </div>
-        <h3 className="text-2xl font-semibold text-foreground mb-2">Vitality App 在做什么？</h3>
+        <h3 className="text-2xl font-semibold text-foreground mb-2">SORGEN App 在做什么？</h3>
         <p className="text-lg text-primary">帮助家庭理解长期变化的管理中枢</p>
       </div>
 
       <div className="space-y-4">
         <p className="text-muted-foreground leading-relaxed">
-          Vitality App 并不是一个记录数据的工具，而是一个<span className="text-foreground font-medium">帮助家庭理解长期变化的管理中枢</span>。
+          SORGEN App 并不是一个记录数据的工具，而是一个<span className="text-foreground font-medium">帮助家庭理解长期变化的管理中枢</span>。
         </p>
         <p className="text-muted-foreground leading-relaxed">
           它将恢复舱感知到的状态信息，与 小元的解读结果进行整合，以更容易理解的方式呈现给用户。
@@ -224,7 +224,7 @@ export function ProductDetailDialog({ open, onOpenChange, productType }: Product
       </div>
 
       <div className="space-y-4">
-        <h4 className="text-xl font-semibold text-foreground">Vitality App 不在做什么？</h4>
+        <h4 className="text-xl font-semibold text-foreground">SORGEN App 不在做什么？</h4>
         <p className="text-muted-foreground">为了明确边界，我们同样清楚地说明：</p>
         <ul className="space-y-2 text-muted-foreground">
           <li>• 不提供医学检测数值</li>
@@ -238,13 +238,13 @@ export function ProductDetailDialog({ open, onOpenChange, productType }: Product
 
       <div className="bg-card rounded-xl p-6 border border-primary/20 text-center">
         <h4 className="text-lg font-semibold text-foreground mb-2">一个更安心的查看方式</h4>
-        <p className="text-muted-foreground">Vitality App 的设计目标只有一个：</p>
+        <p className="text-muted-foreground">SORGEN App 的设计目标只有一个：</p>
         <p className="text-foreground font-medium mt-2">让你在查看时，感到安心，而不是焦虑。</p>
       </div>
 
       <div className="bg-muted/50 rounded-xl p-4 text-sm text-muted-foreground">
         <p className="font-medium text-foreground mb-2">声明</p>
-        <p>Vitality App 为健康管理与生活方式支持工具，不构成医疗诊断或治疗建议。如有明确身体不适，请及时就医并遵循专业医生意见。</p>
+        <p>SORGEN App 为健康管理与生活方式支持工具，不构成医疗诊断或治疗建议。如有明确身体不适，请及时就医并遵循专业医生意见。</p>
       </div>
     </div>
   );
@@ -262,7 +262,7 @@ export function ProductDetailDialog({ open, onOpenChange, productType }: Product
       <div className="space-y-2 text-center">
         <p className="text-muted-foreground">不是医疗设备，不做疾病诊断。</p>
         <p className="text-muted-foreground leading-relaxed">
-          恢复舱，是Vitality居家健康管理系统中的<span className="text-foreground font-medium">核心执行终端</span>，
+          恢复舱，是SORGEN 居家健康管理系统中的<span className="text-foreground font-medium">核心执行终端</span>，
           通过非接触式状态感知与 AI 分析，帮助用户长期、持续地了解身体状态变化，并将健康管理真正落地到日常生活中。
         </p>
       </div>
@@ -344,7 +344,7 @@ export function ProductDetailDialog({ open, onOpenChange, productType }: Product
           <div className="bg-card rounded-xl p-4 border border-border/50">
             <div className="flex items-center gap-2 mb-2">
               <Smartphone className="w-5 h-5 text-primary" />
-              <h5 className="font-medium text-foreground">Vitality App</h5>
+              <h5 className="font-medium text-foreground">SORGEN App</h5>
             </div>
             <ul className="space-y-1 text-muted-foreground text-sm">
               <li>• 汇总长期状态记录</li>

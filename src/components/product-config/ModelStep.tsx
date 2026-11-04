@@ -12,7 +12,7 @@ export const ModelStep = forwardRef<HTMLDivElement, ModelStepProps>(
   ({ selectedId, confirmingId, onSelect }, ref) => (
     <div ref={ref} className="scroll-mt-32">
       <h3 className="text-lg font-medium text-foreground mb-1">① 选择型号</h3>
-      <p className="text-sm text-muted-foreground mb-4">由小元驱动的整套健康基线，因型号而异。</p>
+      <p className="text-sm text-muted-foreground mb-4">按需求了解配置差异，价格请预约咨询。</p>
       <div className="space-y-3">
         {models.map((model) => {
           const isSelected = selectedId === model.id;
@@ -46,7 +46,7 @@ export const ModelStep = forwardRef<HTMLDivElement, ModelStepProps>(
                     </div>
                   </div>
                 </div>
-                <p className="text-lg font-semibold text-foreground">{model.priceDisplay}</p>
+                <p className="text-sm font-medium text-muted-foreground">{model.priceDisplay}</p>
               </div>
               <ul className="ml-8 grid grid-cols-2 gap-1.5">
                 {model.features.map((feature) => (

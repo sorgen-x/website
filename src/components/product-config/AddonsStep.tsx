@@ -14,7 +14,7 @@ export const AddonsStep = forwardRef<HTMLDivElement, AddonsStepProps>(
         <Package className="w-4 h-4 text-muted-foreground" />
         <h3 className="text-lg font-medium text-foreground">④ 其他配置</h3>
       </div>
-      <p className="text-sm text-muted-foreground mb-4">按需叠加。每一项，都被小元纳入您的健康方案。</p>
+      <p className="text-sm text-muted-foreground mb-4">按需了解。具体搭配可在咨询时确认。</p>
       <div className="grid grid-cols-2 gap-3">
         {otherOptions.map((addon) => {
           const isSelected = selectedIds.includes(addon.id);

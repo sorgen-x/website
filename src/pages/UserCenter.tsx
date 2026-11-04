@@ -200,7 +200,7 @@ export default function UserCenter() {
           <ArrowLeft className="w-4 h-4" />
           <span className="text-sm">{t("返回首页", "Back to Home")}</span>
         </button>
-        <img src={logo} alt="Vitality" className="h-8" />
+        <img src={logo} alt="SORGEN" className="h-8" />
         <div className="w-20" />
       </header>
 

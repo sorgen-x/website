@@ -157,7 +157,7 @@ export default function Auth() {
             throw error;
           }
         }
-        toast({ title: "登录成功", description: "欢迎使用Vitality！" });
+        toast({ title: "登录成功", description: "欢迎使用 SORGEN！" });
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: phoneEmail,
@@ -216,7 +216,7 @@ export default function Auth() {
           },
         });
         if (error) throw error;
-        toast({ title: "注册成功", description: "欢迎加入Vitality！" });
+        toast({ title: "注册成功", description: "欢迎加入 SORGEN！" });
         navigate("/");
       }
     } catch (error: any) {
@@ -306,7 +306,7 @@ export default function Auth() {
         <div className="w-full max-w-md space-y-8">
           {/* Logo */}
           <div className="text-center space-y-4">
-            <img src={logo} alt="Vitality" className="h-12 mx-auto" />
+            <img src={logo} alt="SORGEN" className="h-12 mx-auto" />
             <h1 className="text-2xl font-semibold text-foreground">{getTitle()}</h1>
             <p className="text-muted-foreground">{getSubtitle()}</p>
           </div>

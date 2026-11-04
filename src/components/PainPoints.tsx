@@ -3,39 +3,37 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const healthCards = [
   {
-    tag: "未病先防",
-    title: "洞察细微，防患未然。",
-    description: "Vitality 并非只在您生病时介入。通过每日 15 分钟扫描，追踪 2,000+ 项指标，比症状出现早 48 小时预警。",
+    tag: "感知",
+    title: "更早看见变化。",
+    description: "入舱扫描，建立个人基线。在身体发出明确信号之前，帮助你察觉细微波动。",
     icon: Shield,
   },
   {
-    tag: "深层修复",
-    title: "身心归零，焕然新生。",
-    description: "自动生成光、音、气、磁四维修复方案。在零重力状态下，让每一个细胞重获活力。",
+    tag: "恢复",
+    title: "把恢复留给舱内。",
+    description: "光、声、气、姿态协同。一次短时沉浸，让身心回到可继续的状态。",
     icon: Sparkles,
   },
 ];
 
 export function PainPoints() {
   const { ref, isVisible } = useScrollAnimation();
-  
+
   return (
     <section className="py-24 lg:py-32 bg-card">
       <div ref={ref} className="max-w-5xl mx-auto px-6">
-        {/* Section Header */}
-        <div className={`text-center max-w-3xl mx-auto mb-16 stagger-item ${isVisible ? 'stagger-visible' : ''}`}>
+        <div className={`text-center max-w-3xl mx-auto mb-16 stagger-item ${isVisible ? "stagger-visible" : ""}`}>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground tracking-tight mb-6">
-            主动健康，
-            <span className="text-primary">从此不一样。</span>
+            少说多做，
+            <span className="text-primary">坐进去就懂。</span>
           </h2>
         </div>
 
-        {/* Health Cards Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {healthCards.map((card, index) => (
             <div
               key={index}
-              className={`group p-10 rounded-3xl bg-background hover:shadow-medium transition-all duration-500 stagger-item ${isVisible ? 'stagger-visible' : ''}`}
+              className={`group p-10 rounded-3xl bg-background hover:shadow-medium transition-all duration-500 stagger-item ${isVisible ? "stagger-visible" : ""}`}
               style={{ transitionDelay: `${0.1 + index * 0.15}s` }}
             >
               <div className="flex items-center gap-3 mb-6">
@@ -49,9 +47,7 @@ export function PainPoints() {
               <h3 className="text-2xl lg:text-3xl font-semibold text-foreground mb-4 leading-tight">
                 {card.title}
               </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {card.description}
-              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">{card.description}</p>
             </div>
           ))}
         </div>

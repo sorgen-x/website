@@ -102,7 +102,7 @@ export function AIAssistant() {
             </h2>
 
             <p className="text-xl text-muted-foreground leading-relaxed">
-              不只是一个App，而是与Vitality硬件深度整合的智能健康管理系统。
+              不只是一个App，而是与 SORGEN 硬件深度整合的智能健康管理系统。
               通过实时数据同步与AI分析，为您提供真正个性化的健康建议。
             </p>
 

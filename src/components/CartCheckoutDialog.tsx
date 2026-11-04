@@ -95,7 +95,7 @@ export function CartCheckoutDialog({
             user_id: user.id,
             order_number: orderNumber,
             model_id: item.modelId,
-            model_name: `Vitality ${item.modelName}`,
+            model_name: `SORGEN ${item.modelName}`,
             model_price: item.modelPrice,
             addons: item.addons.map(a => ({ name: a.name, price: a.price })),
             quantity: item.quantity,
@@ -197,7 +197,7 @@ export function CartCheckoutDialog({
                   <div key={item.id} className="bg-muted/30 rounded-2xl p-5 space-y-3">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h4 className="font-medium text-foreground">Vitality {item.modelName}</h4>
+                        <h4 className="font-medium text-foreground">SORGEN {item.modelName}</h4>
                         <p className="text-sm text-muted-foreground mt-1">
                           {formatPrice(item.modelPrice)} × {item.quantity}
                         </p>

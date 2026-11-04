@@ -26,12 +26,12 @@ export const InteriorStep = forwardRef<HTMLDivElement, InteriorStepProps>(
           并排对比
         </button>
       </div>
-      <p className="text-sm text-muted-foreground mb-4">触感即疗愈。小元在每一次入舱时，识别您的偏好。</p>
+      <p className="text-sm text-muted-foreground mb-4">触感决定氛围。选择你更想长时间待在里面的材质。</p>
 
       <div className="rounded-2xl overflow-hidden mb-5 shadow-sm">
         <img
           src={productInterior}
-          alt="Vitality 砂金内饰实景"
+          alt="Aether 内舱"
           className="w-full h-auto object-cover"
           loading="lazy"
         />

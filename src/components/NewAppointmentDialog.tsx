@@ -23,7 +23,7 @@ interface NewAppointmentDialogProps {
 }
 
 const appointmentTypes = [
-  { id: "experience", labelZh: "产品体验", labelEn: "Product Experience", desc: "亲身体验Vitality恢复舱" },
+  { id: "experience", labelZh: "产品体验", labelEn: "Product Experience", desc: "亲身体验 Aether 家用恢复舱" },
   { id: "consultation", labelZh: "健康咨询", labelEn: "Health Consultation", desc: "与专业健康顾问一对一咨询" },
   { id: "health_check", labelZh: "健康检查", labelEn: "Health Check", desc: "全面健康状态评估" },
 ];

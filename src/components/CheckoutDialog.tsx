@@ -102,7 +102,7 @@ export function CheckoutDialog({
           user_id: user.id,
           order_number: newOrderNumber,
           model_id: modelId,
-          model_name: `Vitality ${modelName}`,
+          model_name: `SORGEN ${modelName}`,
           model_price: modelPrice,
           addons: addons.map(a => ({ name: a.name, price: a.price })),
           quantity: quantity,
@@ -198,7 +198,7 @@ export function CheckoutDialog({
                 {/* 型号 */}
                 <BreakdownRow
                   label="型号"
-                  name={`Vitality ${modelName}`}
+                  name={`SORGEN ${modelName}`}
                   meta={`AI 智能恢复舱 × ${quantity}`}
                   price={modelPrice * quantity}
                   formatPrice={formatPrice}
@@ -440,7 +440,7 @@ export function CheckoutDialog({
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">产品</span>
-                  <span className="text-foreground">Vitality {modelName}</span>
+                  <span className="text-foreground">SORGEN {modelName}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">金额</span>

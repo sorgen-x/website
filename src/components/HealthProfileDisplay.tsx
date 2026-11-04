@@ -92,7 +92,7 @@ export function HealthProfileDisplay({
     { subject: t("睡眠质量", "Sleep Quality"), A: profile.sleepHealthScore, fullMark: 100 },
     { subject: t("压力管理", "Stress Mgmt"), A: profile.stressManagementScore, fullMark: 100 },
     { subject: t("综合健康", "Overall Health"), A: profile.overallHealthScore, fullMark: 100 },
-    { subject: t("活力指数", "Vitality"), A: Math.round((profile.overallHealthScore + profile.sleepHealthScore) / 2), fullMark: 100 },
+    { subject: t("活力指数", "Vigor"), A: Math.round((profile.overallHealthScore + profile.sleepHealthScore) / 2), fullMark: 100 },
     { subject: t("恢复能力", "Recovery"), A: Math.round((profile.sleepHealthScore + profile.stressManagementScore) / 2), fullMark: 100 },
   ];
 

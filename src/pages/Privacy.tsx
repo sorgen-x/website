@@ -27,7 +27,7 @@ export default function Privacy() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">1. 信息收集</h2>
             <p>
-              我们（深圳溯元求索智能科技有限公司，简称“溯元”）收集您在使用 Vitality 服务时提供的个人信息，包括但不限于：姓名、联系方式、健康数据等。这些信息将用于为您提供更好的健康管理服务。
+              我们（深圳溯元求索智能科技有限公司，简称“溯元”）收集您在使用 SORGEN 服务时提供的个人信息，包括但不限于：姓名、联系方式、健康数据等。这些信息将用于为您提供更好的健康管理服务。
             </p>
           </section>
 
@@ -71,7 +71,7 @@ export default function Privacy() {
               如果您对本隐私政策有任何疑问，请通过以下方式联系我们：
             </p>
             <p>公司：深圳溯元求索智能科技有限公司</p>
-            <p>邮箱：privacy@suyuan.com</p>
+            <p>邮箱：privacy@sorgenx.com</p>
           </section>
         </div>
       </main>

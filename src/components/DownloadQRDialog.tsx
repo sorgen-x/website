@@ -17,7 +17,7 @@ export function DownloadQRDialog({ open, onOpenChange }: DownloadQRDialogProps) 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl">下载Vitality App</DialogTitle>
+          <DialogTitle className="text-center text-xl">下载 SORGEN App</DialogTitle>
           <DialogDescription className="text-center">
             扫描二维码下载移动应用
           </DialogDescription>
