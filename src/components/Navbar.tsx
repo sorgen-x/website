@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 const navLinks = [
   { label: "Aether", href: "#gallery" },
   { label: "体验", href: "#sensory" },
+  { label: "小元", href: "#system" },
   { label: "关于", href: "#about" },
   { label: "配置", href: "#configure" },
 ];

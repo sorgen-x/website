@@ -6,7 +6,7 @@ export const models: ModelOption[] = [
     name: "Aether",
     price: 0,
     priceDisplay: "咨询报价",
-    features: ["舱内短时恢复", "姿态 · 光 · 声协同", "家庭多用户", "基础服务"],
+    features: ["舱内短时恢复", "声 · 光 · 热 · 氧 · 姿态", "家庭多用户", "基础服务"],
   },
   {
     id: "pro",
@@ -55,9 +55,9 @@ export const specs: Spec[] = [
 ];
 
 export const aiValuePoints: ValuePoint[] = [
-  { title: "看得更早。", desc: "建立个人基线，察觉细微变化。" },
-  { title: "更懂你。", desc: "专属偏好与长期对照。" },
-  { title: "随时问。", desc: "舱内与 App 一句话即响应。" },
+  { title: "越用越懂你。", desc: "每一次进舱，都让下一套方案更贴合。" },
+  { title: "两份身体数据。", desc: "授权后的全天穿戴，加上进舱这一刻。" },
+  { title: "走了也能看见。", desc: "报告留在 App 里，看见自己一次次更稳。" },
 ];
 
 export const stepDefs: { key: StepKey; label: string }[] = [

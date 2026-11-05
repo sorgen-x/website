@@ -1,5 +1,4 @@
 import productInterior from "@/assets/product-interior.png";
-import productGallery from "@/assets/product-gallery.png";
 import productDoor from "@/assets/product-door.png";
 import productTopdown from "@/assets/product-topdown.png";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -47,20 +46,8 @@ export function ProductGallery() {
           </div>
 
           <div
-            className={`rounded-[2rem] overflow-hidden bg-background shadow-sm scroll-hidden ${detail.isVisible ? "scroll-visible" : ""}`}
+            className={`grid md:grid-cols-2 gap-6 scroll-hidden ${detail.isVisible ? "scroll-visible" : ""}`}
             style={{ transitionDelay: "0.15s" }}
-          >
-            <img
-              src={productGallery}
-              alt="Aether 多角度展示"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-
-          <div
-            className={`mt-6 grid md:grid-cols-2 gap-6 scroll-hidden ${detail.isVisible ? "scroll-visible" : ""}`}
-            style={{ transitionDelay: "0.25s" }}
           >
             <div className="rounded-[1.5rem] overflow-hidden bg-background shadow-sm aspect-[16/10]">
               <img src={productDoor} alt="Aether 舱门" className="w-full h-full object-cover" loading="lazy" />
