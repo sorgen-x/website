@@ -5,32 +5,32 @@ const sensoryItems = [
   {
     icon: AudioWaveform,
     title: "声",
-    subtitle: "安静声场",
-    description: "环境声跟着这次方案走，让你更容易慢下来。",
+    subtitle: "舒曼波 · 白噪音 · 音乐",
+    description: "舒曼波、环境白噪音与氛围舒缓音乐一起组成舱内声场，跟着这次方案走。",
   },
   {
     icon: Sun,
     title: "光",
-    subtitle: "柔和光带",
-    description: "亮度与色温随当次恢复调节，不刺眼。",
+    subtitle: "远红外与氛围灯",
+    description: "远红外与环境氛围灯一起调节，亮度与氛围随当次方案。",
   },
   {
     icon: Thermometer,
     title: "热",
-    subtitle: "舱内温度",
-    description: "冷暖按当下状态安排，你不用自己去调。",
+    subtitle: "温度控制",
+    description: "舱内温度按当下状态控制，你不用自己去调。",
   },
   {
     icon: Wind,
     title: "氧",
-    subtitle: "舱内氧气环境",
-    description: "作为恢复环境的一部分纳入方案，状态以舱端为准。",
+    subtitle: "浓度与速率",
+    description: "氧气浓度与供氧速率纳入方案，状态以舱端为准。",
   },
   {
     icon: Orbit,
     title: "姿态",
-    subtitle: "全身承托",
-    description: "坐下即被托住；方案会照顾你怎么坐、怎么躺。",
+    subtitle: "零重力座椅",
+    description: "零重力座椅承托全身；记忆、通风、加热、按摩随方案一起安排。",
   },
 ];
 
@@ -42,9 +42,11 @@ export function SensoryExperience() {
       <div ref={ref} className="max-w-6xl mx-auto px-6">
         <div className={`text-center max-w-3xl mx-auto mb-16 stagger-item ${isVisible ? "stagger-visible" : ""}`}>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight mb-6">
-            一次恢复，由这五件事组成。
+            小元调度的五件事。
           </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">声 · 光 · 热 · 氧 · 姿态</p>
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            声 · 光 · 热 · 氧 · 姿态。每一次，按你此刻的状态一次安排好。
+          </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
