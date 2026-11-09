@@ -14,9 +14,26 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["'Noto Sans SC'", "system-ui", "sans-serif"],
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "'Segoe UI'",
+          "'PingFang SC'",
+          "'HarmonyOS Sans SC'",
+          "'HarmonyOS Sans'",
+          "'Microsoft YaHei'",
+          "'Noto Sans CJK SC'",
+          "'Helvetica Neue'",
+          "Arial",
+          "sans-serif",
+        ],
+      },
+      letterSpacing: {
+        tight: "-0.02em",
       },
       colors: {
+        metal: "hsl(var(--metal))",
+        link: "hsl(var(--link))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

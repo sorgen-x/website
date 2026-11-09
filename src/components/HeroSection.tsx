@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import productHero from "@/assets/product-hero.png";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { siteImages } from "@/lib/images";
 
 export function HeroSection() {
   const scrollToContact = () => {
@@ -9,11 +10,12 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-end overflow-hidden bg-black pt-14">
       <div className="absolute inset-0">
-        <img
-          src={productHero}
+        <ResponsiveImage
+          image={siteImages.hero}
           alt="Aether 家用恢复舱"
+          sizes="100vw"
+          priority
           className="h-full w-full object-cover object-center"
-          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
       </div>

@@ -1,203 +1,99 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import {
-  exteriorOptions,
-  interiorOptions,
-  models,
-  otherOptions,
-} from "./product-config/data";
-import type { SelectedAddon, StepKey } from "./product-config/types";
-import { useStepConfirm } from "./product-config/useStepConfirm";
-import { ConfigPreview } from "./product-config/ConfigPreview";
-import { StepProgress } from "./product-config/StepProgress";
-import { ModelStep } from "./product-config/ModelStep";
-import { ExteriorStep } from "./product-config/ExteriorStep";
-import { InteriorStep } from "./product-config/InteriorStep";
-import { AddonsStep } from "./product-config/AddonsStep";
-import { SummaryStep } from "./product-config/SummaryStep";
-import { ConfigActions } from "./product-config/ConfigActions";
-import { ConfigCompareDialog } from "./ConfigCompareDialog";
+import { siteImages, type SiteImage } from "@/lib/images";
+
+type Finish = {
+  id: string;
+  name: string;
+  swatch: string;
+  /** Per-color render. Falls back to the default image until one exists. */
+  image?: SiteImage;
+};
+
+const finishes: Finish[] = [
+  { id: "pearl", name: "珍珠白", swatch: "#F2EFEA" },
+  { id: "obsidian", name: "曜石黑", swatch: "#1A1A1C" },
+  { id: "gold", name: "鎏光金", swatch: "#C4A15A" },
+  { id: "silver", name: "星河银", swatch: "#C6CAD0" },
+];
+
+const defaultImage = siteImages.topdown;
+
+const interiors = ["亚麻", "Nappa 真皮", "Alcantara"];
 
 export function ProductConfig() {
-  const [selectedModel, setSelectedModel] = useState("pro");
-  const [selectedExterior, setSelectedExterior] = useState("exterior-pearl");
-  const [selectedInterior, setSelectedInterior] = useState("interior-linen");
-  const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
-  const [compareExteriorOpen, setCompareExteriorOpen] = useState(false);
-  const [compareInteriorOpen, setCompareInteriorOpen] = useState(false);
-  const [previewTab, setPreviewTab] = useState<"exterior" | "interior">("exterior");
-  const [activeStep, setActiveStep] = useState<StepKey>("model");
-
+  const [selectedId, setSelectedId] = useState(finishes[0].id);
   const { ref, isVisible } = useScrollAnimation();
-
-  const stepRefs: Record<StepKey, React.RefObject<HTMLDivElement>> = {
-    model: useRef<HTMLDivElement>(null),
-    exterior: useRef<HTMLDivElement>(null),
-    interior: useRef<HTMLDivElement>(null),
-    addons: useRef<HTMLDivElement>(null),
-    summary: useRef<HTMLDivElement>(null),
-  };
-
-  const scrollToStep = (key: StepKey) => {
-    setActiveStep(key);
-    stepRefs[key].current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const { confirmingId, selectWithConfirm } = useStepConfirm(scrollToStep);
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    (Object.keys(stepRefs) as StepKey[]).forEach((key) => {
-      const el = stepRefs[key].current;
-      if (!el) return;
-      const ob = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveStep(key);
-        },
-        { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
-      );
-      ob.observe(el);
-      observers.push(ob);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const currentModel = useMemo(
-    () => models.find((m) => m.id === selectedModel)!,
-    [selectedModel]
-  );
-  const currentExterior = useMemo(
-    () => exteriorOptions.find((o) => o.id === selectedExterior)!,
-    [selectedExterior]
-  );
-  const currentInterior = useMemo(
-    () => interiorOptions.find((o) => o.id === selectedInterior)!,
-    [selectedInterior]
-  );
-
-  const selectedAddonDetails = useMemo<SelectedAddon[]>(() => {
-    const list: SelectedAddon[] = [];
-    if (currentExterior.id !== "exterior-pearl") {
-      list.push({
-        id: currentExterior.id,
-        name: `外观 · ${currentExterior.name}`,
-        price: 0,
-        priceDisplay: currentExterior.priceDisplay,
-      });
-    }
-    if (currentInterior.id !== "interior-linen") {
-      list.push({
-        id: currentInterior.id,
-        name: `内饰 · ${currentInterior.name}`,
-        price: 0,
-        priceDisplay: currentInterior.priceDisplay,
-      });
-    }
-    otherOptions
-      .filter((a) => selectedAddons.includes(a.id))
-      .forEach((a) =>
-        list.push({ id: a.id, name: a.name, price: 0, priceDisplay: a.priceDisplay })
-      );
-    return list;
-  }, [currentExterior, currentInterior, selectedAddons]);
-
-  const toggleAddon = (id: string) => {
-    setSelectedAddons((prev) =>
-      prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]
-    );
-  };
+  const selected = finishes.find((f) => f.id === selectedId) ?? finishes[0];
 
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="configure" className="py-24 lg:py-32 bg-background">
+    <section id="configure" className="section-y bg-background">
       <div ref={ref} className="max-w-6xl mx-auto px-6">
-        <div
-          className={`text-center max-w-3xl mx-auto mb-16 stagger-item ${
-            isVisible ? "stagger-visible" : ""
-          }`}
-        >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight mb-6">
-            了解配置。
+        <div className={`text-center max-w-3xl mx-auto mb-12 lg:mb-16 stagger-item ${isVisible ? "stagger-visible" : ""}`}>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight">
+            材质与色彩。
           </h2>
-          <p className="text-xl text-muted-foreground">定制你的 Aether · 价格请预约咨询</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          <ConfigPreview
-            previewTab={previewTab}
-            onPreviewTabChange={setPreviewTab}
-            isVisible={isVisible}
+        <div
+          className={`relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-card stagger-item ${isVisible ? "stagger-visible" : ""}`}
+          style={{ transitionDelay: "0.1s" }}
+        >
+          <ResponsiveImage
+            key={selected.id}
+            image={selected.image ?? defaultImage}
+            alt={`Aether · ${selected.name}`}
+            sizes="(min-width: 1152px) 1104px, 100vw"
+            className="w-full h-full object-cover animate-fade-in"
           />
+        </div>
 
-          <div className="space-y-8">
-            <StepProgress activeStep={activeStep} onStepClick={scrollToStep} />
-
-            <ModelStep
-              ref={stepRefs.model}
-              selectedId={selectedModel}
-              confirmingId={confirmingId}
-              onSelect={(id) => selectWithConfirm(id, setSelectedModel, "exterior")}
-            />
-
-            <ExteriorStep
-              ref={stepRefs.exterior}
-              selectedId={selectedExterior}
-              confirmingId={confirmingId}
-              onSelect={(id) => selectWithConfirm(id, setSelectedExterior, "interior")}
-              onCompare={() => setCompareExteriorOpen(true)}
-            />
-
-            <InteriorStep
-              ref={stepRefs.interior}
-              selectedId={selectedInterior}
-              confirmingId={confirmingId}
-              onSelect={(id) => selectWithConfirm(id, setSelectedInterior, "addons")}
-              onCompare={() => setCompareInteriorOpen(true)}
-            />
-
-            <AddonsStep
-              ref={stepRefs.addons}
-              selectedIds={selectedAddons}
-              onToggle={toggleAddon}
-            />
-
-            <SummaryStep
-              ref={stepRefs.summary}
-              model={currentModel}
-              addons={selectedAddonDetails}
-              totalPrice={0}
-            />
-
-            <ConfigActions
-              onCheckout={scrollToContact}
-              onSave={scrollToContact}
-              isLoggedIn={false}
-              showAddToCart={false}
-            />
+        <div
+          className={`mt-10 flex flex-col items-center stagger-item ${isVisible ? "stagger-visible" : ""}`}
+          style={{ transitionDelay: "0.18s" }}
+        >
+          <div role="radiogroup" aria-label="外观颜色" className="flex items-center gap-5">
+            {finishes.map((finish) => {
+              const active = finish.id === selected.id;
+              return (
+                <button
+                  key={finish.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  aria-label={finish.name}
+                  onClick={() => setSelectedId(finish.id)}
+                  className={`h-9 w-9 rounded-full p-[3px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    active ? "ring-1 ring-foreground/70" : "ring-1 ring-transparent hover:ring-foreground/20"
+                  }`}
+                >
+                  <span
+                    className="block h-full w-full rounded-full border border-black/10"
+                    style={{ backgroundColor: finish.swatch }}
+                  />
+                </button>
+              );
+            })}
           </div>
+
+          <p className="mt-5 text-base font-medium text-foreground" aria-live="polite">
+            {selected.name}
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground tracking-wide">
+            内饰 · {interiors.join(" / ")}
+          </p>
+
+          <Button variant="hero" size="lg" onClick={scrollToContact} className="mt-10 min-w-[180px]">
+            预约了解配置
+          </Button>
         </div>
       </div>
-
-      <ConfigCompareDialog
-        open={compareExteriorOpen}
-        onOpenChange={setCompareExteriorOpen}
-        type="exterior"
-        items={exteriorOptions}
-        selectedId={selectedExterior}
-        onSelect={setSelectedExterior}
-      />
-      <ConfigCompareDialog
-        open={compareInteriorOpen}
-        onOpenChange={setCompareInteriorOpen}
-        type="interior"
-        items={interiorOptions}
-        selectedId={selectedInterior}
-        onSelect={setSelectedInterior}
-      />
     </section>
   );
 }

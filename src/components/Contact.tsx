@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Building2, Globe } from "lucide-react";
+import { Mail, Building2, Globe, Check } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -19,6 +19,7 @@ export function Contact() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -64,12 +65,8 @@ export function Contact() {
 
       if (error) throw error;
 
-      toast({
-        title: "提交成功",
-        description: "我们会尽快与您联系",
-      });
-
       setFormData({ name: "", phone: "", message: "" });
+      setSubmitted(true);
 
       void (async () => {
         try {
@@ -98,14 +95,14 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 bg-card">
+    <section id="contact" className="section-y bg-card">
       <div ref={ref} className="max-w-4xl mx-auto px-6">
         <div className={`text-center max-w-3xl mx-auto mb-16 stagger-item ${isVisible ? "stagger-visible" : ""}`}>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight mb-6">
             预约体验
           </h2>
           <p className="text-xl text-muted-foreground">
-            留下联系方式，我们会尽快与您沟通
+            留下联系方式，我们会尽快与你联系。
           </p>
         </div>
 
@@ -113,6 +110,22 @@ export function Contact() {
           className={`bg-background rounded-3xl p-8 lg:p-12 stagger-item ${isVisible ? "stagger-visible" : ""}`}
           style={{ transitionDelay: "0.15s" }}
         >
+          {submitted ? (
+            <div className="py-10 text-center animate-fade-in" role="status" aria-live="polite">
+              <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-foreground/15">
+                <Check className="h-5 w-5 text-foreground" strokeWidth={1.5} />
+              </div>
+              <p className="text-2xl font-semibold text-foreground tracking-tight">已收到。</p>
+              <p className="mt-3 text-muted-foreground">我们会尽快与你联系。</p>
+              <button
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="mt-8 text-sm text-link underline-offset-4 hover:underline"
+              >
+                再提交一份
+              </button>
+            </div>
+          ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid sm:grid-cols-2 gap-6">
               <div>
@@ -156,6 +169,7 @@ export function Contact() {
               {isSubmitting ? "提交中..." : "预约体验"}
             </Button>
           </form>
+          )}
 
           <div className="mt-12 pt-8 border-t border-border grid sm:grid-cols-3 gap-6">
             {contactInfo.map((info) => (

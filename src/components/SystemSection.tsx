@@ -11,10 +11,10 @@ const loopSteps = [
 ] as const;
 
 const whoFits = [
-  { id: "stress", label: "压力急救", who: "焦虑、高压、想慢下来时" },
-  { id: "morning", label: "晨间提神", who: "醒不来、脑雾、马上要开工时" },
-  { id: "noon", label: "午间补能", who: "午后犯困、精力低谷时" },
-  { id: "recovery", label: "运动后修复", who: "练完、重体力后想恢复时" },
+  { id: "morning", label: "清晨", who: "醒来，慢慢进入状态。" },
+  { id: "noon", label: "午后", who: "歇一会儿，再出发。" },
+  { id: "recovery", label: "运动后", who: "练完，让身体缓下来。" },
+  { id: "night", label: "夜晚", who: "一天结束，安静下来。" },
 ] as const;
 
 const SCENE_MS = 3500;
@@ -69,7 +69,7 @@ export function SystemSection() {
   };
 
   return (
-    <section id="system" className="py-24 lg:py-32 bg-card">
+    <section id="system" className="section-y bg-card">
       <div ref={ref} className="max-w-6xl mx-auto px-6">
         <div
           className={`text-center max-w-3xl mx-auto mb-14 stagger-item ${isVisible ? "stagger-visible" : ""}`}
@@ -78,7 +78,7 @@ export function SystemSection() {
             小元怎么给出这一次
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            读状态、给处方、守边界。舱落地；App 来前准备、走后看见。
+            读懂此刻，安排这一次。
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export function SystemSection() {
               {/* Soft ambient bloom behind core */}
               <div
                 aria-hidden
-                className="xy-breathe-centered pointer-events-none absolute left-1/2 top-1/2 h-[48%] w-[48%] rounded-full bg-primary/[0.08] blur-3xl"
+                className="xy-breathe-centered pointer-events-none absolute left-1/2 top-1/2 h-[48%] w-[48%] rounded-full bg-metal/[0.14] blur-3xl"
               />
 
               <svg
@@ -106,13 +106,13 @@ export function SystemSection() {
               >
                 <defs>
                   <linearGradient id="xy-ring-base" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="hsl(210 100% 50%)" stopOpacity="0.16" />
-                    <stop offset="55%" stopColor="hsl(210 30% 60%)" stopOpacity="0.05" />
-                    <stop offset="100%" stopColor="hsl(210 100% 50%)" stopOpacity="0.12" />
+                    <stop offset="0%" stopColor="hsl(var(--metal))" stopOpacity="0.16" />
+                    <stop offset="55%" stopColor="hsl(var(--metal))" stopOpacity="0.05" />
+                    <stop offset="100%" stopColor="hsl(var(--metal))" stopOpacity="0.12" />
                   </linearGradient>
                   <linearGradient id="xy-ring-sweep" gradientUnits="userSpaceOnUse" x1="200" y1="40" x2="200" y2="200">
-                    <stop offset="0%" stopColor="hsl(210 100% 55%)" stopOpacity="0.55" />
-                    <stop offset="100%" stopColor="hsl(210 100% 55%)" stopOpacity="0" />
+                    <stop offset="0%" stopColor="hsl(var(--metal))" stopOpacity="0.55" />
+                    <stop offset="100%" stopColor="hsl(var(--metal))" stopOpacity="0" />
                   </linearGradient>
                 </defs>
 
@@ -147,7 +147,7 @@ export function SystemSection() {
                   cy="200"
                   r="148"
                   fill="none"
-                  stroke="hsl(210 100% 50%)"
+                  stroke="hsl(var(--metal))"
                   strokeWidth="1.25"
                   strokeLinecap="round"
                   strokeDasharray={`${2 * Math.PI * 148 * 0.06} ${2 * Math.PI * 148}`}
@@ -162,7 +162,7 @@ export function SystemSection() {
               <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
                 <div
                   aria-hidden
-                  className="xy-breathe-centered pointer-events-none absolute left-1/2 top-1/2 h-28 w-28 rounded-full bg-primary/[0.1] blur-2xl"
+                  className="xy-breathe-centered pointer-events-none absolute left-1/2 top-1/2 h-28 w-28 rounded-full bg-metal/[0.16] blur-2xl"
                 />
                 <span className="relative text-[22px] sm:text-[26px] font-semibold tracking-[0.22em] text-foreground">
                   小元
@@ -194,28 +194,28 @@ export function SystemSection() {
                       <span
                         className={`block rounded-full transition-all duration-700 ease-out ${
                           active
-                            ? "h-2.5 w-2.5 bg-primary shadow-[0_0_18px_3px_hsl(210_100%_50%/0.4)]"
+                            ? "h-2.5 w-2.5 bg-metal shadow-[0_0_18px_3px_hsl(var(--metal)/0.45)]"
                             : "h-1 w-1 bg-foreground/30"
                         }`}
                       />
                       {active && (
                         <span
                           aria-hidden
-                          className="xy-breathe-scale absolute h-6 w-6 rounded-full border border-primary/20"
+                          className="xy-breathe-scale absolute h-6 w-6 rounded-full border border-metal/30"
                         />
                       )}
                     </span>
 
                     {/* Label radially outside — no cards, no numbers */}
                     <div
-                      className="absolute flex w-16 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center"
+                      className="absolute flex w-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center"
                       style={{
                         left: labelX,
                         top: labelY,
                       }}
                     >
                       <span
-                        className={`text-[11px] sm:text-[12px] tracking-[0.32em] transition-colors duration-500 ${
+                        className={`text-[13px] sm:text-[14px] tracking-[0.28em] transition-colors duration-500 ${
                           active
                             ? "font-medium text-foreground"
                             : "font-normal text-muted-foreground/50"
@@ -224,7 +224,7 @@ export function SystemSection() {
                         {step.title}
                       </span>
                       <span
-                        className={`mt-1.5 text-[10px] tracking-wide text-muted-foreground transition-all duration-400 ${
+                        className={`mt-1.5 text-[12px] tracking-wide text-muted-foreground transition-all duration-400 ${
                           revealed
                             ? "translate-y-0 opacity-70"
                             : "pointer-events-none -translate-y-0.5 opacity-0"
@@ -256,12 +256,12 @@ export function SystemSection() {
           onMouseLeave={() => setPaused(false)}
         >
           <p className="text-center text-xs font-medium tracking-wide text-muted-foreground mb-4">
-            适合谁
+            适合的时刻
           </p>
 
           <div
             role="tablist"
-            aria-label="适合场景"
+            aria-label="适合的时刻"
             className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-5"
           >
             {whoFits.map((item, index) => {
@@ -273,7 +273,7 @@ export function SystemSection() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => pickScene(index)}
-                  className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+                  className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     active
                       ? "bg-foreground text-background"
                       : "bg-background text-muted-foreground hover:text-foreground"

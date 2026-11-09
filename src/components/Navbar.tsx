@@ -8,7 +8,7 @@ const navLinks = [
   { label: "体验", href: "#sensory" },
   { label: "小元", href: "#system" },
   { label: "关于", href: "#about" },
-  { label: "配置", href: "#configure" },
+  { label: "材质", href: "#configure" },
 ];
 
 export function Navbar() {
@@ -42,7 +42,15 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-14">
           <a href="/" className="flex items-center">
-            <img src={logo} alt="SORGEN" className="h-5 w-auto max-w-[120px] object-contain" />
+            <img
+              src={logo}
+              alt="SORGEN"
+              width={1382}
+              height={414}
+              className={`h-5 w-auto max-w-[120px] object-contain transition-[filter] duration-300 ${
+                isScrolled ? "" : "brightness-0 invert"
+              }`}
+            />
           </a>
 
           <div className="hidden md:flex items-center gap-8">

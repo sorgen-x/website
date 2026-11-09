@@ -1,3 +1,5 @@
+// Restores binary assets from export/*.b64 only when they are missing,
+// so a build never overwrites the committed src/assets files.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -12,8 +14,13 @@ function loadB64(name) {
   if (!parts.length) throw new Error('missing b64 for ' + name);
   return parts.map(f => readFileSync(join(exp, f), 'utf8')).join('').replace(/\s+/g, '');
 }
-for (const name of ['logo', 'product-hero', 'product-gallery', 'product-interior']) {
+for (const name of ['logo']) {
+  const target = join(assets, `${name}.png`);
+  if (existsSync(target)) {
+    console.log('kept', name);
+    continue;
+  }
   const buf = Buffer.from(loadB64(name), 'base64');
-  writeFileSync(join(assets, `${name}.png`), buf);
+  writeFileSync(target, buf);
   console.log('decoded', name, buf.length);
 }

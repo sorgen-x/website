@@ -1,6 +1,5 @@
-import productInterior from "@/assets/product-interior.png";
-import productDoor from "@/assets/product-door.png";
-import productTopdown from "@/assets/product-topdown.png";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { siteImages } from "@/lib/images";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export function ProductGallery() {
@@ -9,7 +8,7 @@ export function ProductGallery() {
 
   return (
     <section id="gallery" className="bg-background">
-      <div ref={hero.ref} className="py-24 lg:py-32">
+      <div ref={hero.ref} className="section-y">
         <div className="max-w-6xl mx-auto px-6">
           <div className={`text-center max-w-3xl mx-auto mb-12 lg:mb-16 scroll-hidden ${hero.isVisible ? "scroll-visible" : ""}`}>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight leading-[1.1] mb-5">
@@ -24,17 +23,17 @@ export function ProductGallery() {
             className={`relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-gradient-subtle scroll-hidden ${hero.isVisible ? "scroll-visible" : ""}`}
             style={{ transitionDelay: "0.15s" }}
           >
-            <img
-              src={productInterior}
+            <ResponsiveImage
+              image={siteImages.interior}
               alt="Aether 内舱"
+              sizes="(min-width: 1152px) 1104px, 100vw"
               className="w-full h-full object-cover"
-              loading="lazy"
             />
           </div>
         </div>
       </div>
 
-      <div ref={detail.ref} className="py-24 lg:py-32 bg-muted/30">
+      <div ref={detail.ref} className="section-y bg-muted/30">
         <div className="max-w-6xl mx-auto px-6">
           <div className={`text-center max-w-3xl mx-auto mb-12 lg:mb-16 scroll-hidden ${detail.isVisible ? "scroll-visible" : ""}`}>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight leading-[1.1] mb-5">
@@ -50,10 +49,10 @@ export function ProductGallery() {
             style={{ transitionDelay: "0.15s" }}
           >
             <div className="rounded-[1.5rem] overflow-hidden bg-background shadow-sm aspect-[16/10]">
-              <img src={productDoor} alt="Aether 舱门" className="w-full h-full object-cover" loading="lazy" />
+              <ResponsiveImage image={siteImages.door} alt="Aether 舱门" sizes="(min-width: 768px) 50vw, 100vw" className="w-full h-full object-cover" />
             </div>
             <div className="rounded-[1.5rem] overflow-hidden bg-background shadow-sm aspect-[16/10]">
-              <img src={productTopdown} alt="Aether 俯视图" className="w-full h-full object-cover" loading="lazy" />
+              <ResponsiveImage image={siteImages.topdown} alt="Aether 俯视图" sizes="(min-width: 768px) 50vw, 100vw" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
