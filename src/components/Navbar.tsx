@@ -42,7 +42,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-14">
           <a href="/" className="flex items-center">
-            <img src={logo} alt="SORGEN" className="h-9 w-auto" />
+            <img src={logo} alt="SORGEN" className="h-5 w-auto max-w-[120px] object-contain" />
           </a>
 
           <div className="hidden md:flex items-center gap-8">

@@ -27,6 +27,9 @@ export function HeroSection() {
           <p className="text-lg sm:text-xl text-white/80 font-light tracking-wide">
             家用恢复舱
           </p>
+          <p className="text-sm sm:text-base text-white/55 font-light tracking-wide max-w-xl mx-auto">
+            小元根据你当下状态，调度声、光、热、氧、姿态。
+          </p>
           <div className="pt-4">
             <Button
               variant="hero"

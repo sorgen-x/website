@@ -8,7 +8,7 @@ import { toast } from "@/hooks/use-toast";
 const contactInfo = [
   { icon: Building2, label: "公司", value: "深圳溯元求索智能科技有限公司" },
   { icon: Globe, label: "官网", value: "sorgenx.com" },
-  { icon: Mail, label: "商务合作", value: "contact@sorgenx.com" },
+  { icon: Mail, label: "商务合作", value: "business@sorgenx.com" },
 ];
 
 export function Contact() {
@@ -33,6 +33,11 @@ export function Contact() {
       return;
     }
 
+    if (formData.name.trim().length > 50 || formData.message.trim().length > 500) {
+      toast({ title: "姓名不能超过50字，留言不能超过500字", variant: "destructive" });
+      return;
+    }
+
     if (!formData.phone.trim()) {
       toast({ title: "请输入电话", variant: "destructive" });
       return;
@@ -47,10 +52,14 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
+      const name = formData.name.trim();
+      const phone = formData.phone.trim();
+      const message = formData.message.trim();
+
       const { error } = await supabase.from("contact_inquiries").insert({
-        name: formData.name.trim(),
-        phone: formData.phone.trim(),
-        message: formData.message.trim() || null,
+        name,
+        phone,
+        message: message || null,
       });
 
       if (error) throw error;
@@ -61,11 +70,26 @@ export function Contact() {
       });
 
       setFormData({ name: "", phone: "", message: "" });
+
+      void (async () => {
+        try {
+          const { error: notifyError } = await supabase.functions.invoke("notify-booking", {
+            body: {
+              name,
+              phone,
+              message,
+            },
+          });
+          if (notifyError) throw notifyError;
+        } catch {
+          console.warn("预约已保存，但邮件通知未发送成功。");
+        }
+      })();
     } catch (error) {
       console.error("Submit error:", error);
       toast({
         title: "提交失败",
-        description: "请稍后重试，或发送邮件至 contact@sorgenx.com",
+        description: "请稍后重试，或发送邮件至 business@sorgenx.com",
         variant: "destructive",
       });
     } finally {

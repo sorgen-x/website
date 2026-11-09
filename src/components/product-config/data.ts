@@ -55,9 +55,9 @@ export const specs: Spec[] = [
 ];
 
 export const aiValuePoints: ValuePoint[] = [
-  { title: "越用越懂你。", desc: "每一次进舱，都让下一套方案更贴合。" },
-  { title: "两份身体数据。", desc: "授权后的全天穿戴，加上进舱这一刻。" },
-  { title: "走了也能看见。", desc: "报告留在 App 里，看见自己一次次更稳。" },
+  { title: "两份输入。", desc: "授权后的全天穿戴，加上进舱这一刻体征；没戴也没关系。" },
+  { title: "一套方案。", desc: "给出这一次的声、光、热、氧、姿态；也可选轻恢复。" },
+  { title: "理解留下。", desc: "用得越久，下一次更贴合。报告是正反馈，不是焦虑。" },
 ];
 
 export const stepDefs: { key: StepKey; label: string }[] = [
