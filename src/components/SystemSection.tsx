@@ -167,8 +167,8 @@ export function SystemSection() {
                 <span className="relative text-[22px] sm:text-[26px] font-semibold tracking-[0.22em] text-foreground">
                   小元
                 </span>
-                <span className="relative mt-2.5 text-[9px] uppercase tracking-[0.48em] text-muted-foreground/60">
-                  AI
+                <span className="relative mt-2.5 text-[9px] uppercase tracking-[0.2em] text-muted-foreground/60 whitespace-nowrap">
+                  SORGEN X
                 </span>
               </div>
 
