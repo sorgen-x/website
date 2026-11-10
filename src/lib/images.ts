@@ -28,6 +28,6 @@ function image(variants: Array<[string, number]>, height: number): SiteImage {
 export const siteImages = {
   hero: image([[hero750, 750], [hero1480, 1480]], 1600),
   door: image([[door800, 800], [door1400, 1400], [door2000, 2000]], 1193),
-  interior: image([[interior640, 640], [interior1262, 1262]], 832),
+  interior: image([[interior640, 640], [interior1262, 1262]], 723),
   topdown: image([[topdown640, 640], [topdown1262, 1262]], 832),
 } satisfies Record<string, SiteImage>;
