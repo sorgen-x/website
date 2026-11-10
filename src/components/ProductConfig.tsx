@@ -19,7 +19,7 @@ const finishes: Finish[] = [
   { id: "silver", name: "星河银", swatch: "#C6CAD0" },
 ];
 
-const defaultImage = siteImages.topdown;
+const defaultImage = siteImages.hero;
 
 const interiors = ["亚麻", "Nappa 真皮", "Alcantara"];
 
@@ -50,7 +50,7 @@ export function ProductConfig() {
             image={selected.image ?? defaultImage}
             alt={`Aether · ${selected.name}`}
             sizes="(min-width: 1152px) 1104px, 100vw"
-            className="w-full h-full object-cover animate-fade-in"
+            className="w-full h-full object-contain animate-fade-in"
           />
         </div>
 
