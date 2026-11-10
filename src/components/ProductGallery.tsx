@@ -52,7 +52,7 @@ export function ProductGallery() {
               <ResponsiveImage image={siteImages.door} alt="Aether 舱门" sizes="(min-width: 768px) 50vw, 100vw" className="w-full h-full object-cover" />
             </div>
             <div className="rounded-[1.5rem] overflow-hidden bg-background shadow-sm aspect-[16/10]">
-              <ResponsiveImage image={siteImages.hero} alt="Aether 外观" sizes="(min-width: 768px) 50vw, 100vw" className="w-full h-full object-contain" />
+              <ResponsiveImage image={siteImages.finishPearl} alt="Aether 外观" sizes="(min-width: 768px) 50vw, 100vw" className="w-full h-full object-contain" />
             </div>
           </div>
         </div>

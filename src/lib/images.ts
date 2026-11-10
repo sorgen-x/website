@@ -7,6 +7,14 @@ import interior640 from "@/assets/img/product-interior-640.webp";
 import interior1262 from "@/assets/img/product-interior-1262.webp";
 import topdown640 from "@/assets/img/product-topdown-640.webp";
 import topdown1262 from "@/assets/img/product-topdown-1262.webp";
+import finishPearl800 from "@/assets/img/product-finish-pearl-800.webp";
+import finishPearl1600 from "@/assets/img/product-finish-pearl-1600.webp";
+import finishObsidian800 from "@/assets/img/product-finish-obsidian-800.webp";
+import finishObsidian1600 from "@/assets/img/product-finish-obsidian-1600.webp";
+import finishGold800 from "@/assets/img/product-finish-gold-800.webp";
+import finishGold1600 from "@/assets/img/product-finish-gold-1600.webp";
+import finishSilver800 from "@/assets/img/product-finish-silver-800.webp";
+import finishSilver1600 from "@/assets/img/product-finish-silver-1600.webp";
 
 export type SiteImage = {
   src: string;
@@ -30,4 +38,8 @@ export const siteImages = {
   door: image([[door800, 800], [door1400, 1400], [door2000, 2000]], 1193),
   interior: image([[interior640, 640], [interior1262, 1262]], 723),
   topdown: image([[topdown640, 640], [topdown1262, 1262]], 832),
+  finishPearl: image([[finishPearl800, 800], [finishPearl1600, 1600]], 1152),
+  finishObsidian: image([[finishObsidian800, 800], [finishObsidian1600, 1600]], 1152),
+  finishGold: image([[finishGold800, 800], [finishGold1600, 1600]], 1152),
+  finishSilver: image([[finishSilver800, 800], [finishSilver1600, 1600]], 1152),
 } satisfies Record<string, SiteImage>;

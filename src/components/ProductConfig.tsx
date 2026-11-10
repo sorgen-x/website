@@ -8,18 +8,15 @@ type Finish = {
   id: string;
   name: string;
   swatch: string;
-  /** Per-color render. Falls back to the default image until one exists. */
-  image?: SiteImage;
+  image: SiteImage;
 };
 
 const finishes: Finish[] = [
-  { id: "pearl", name: "珍珠白", swatch: "#F2EFEA" },
-  { id: "obsidian", name: "曜石黑", swatch: "#1A1A1C" },
-  { id: "gold", name: "鎏光金", swatch: "#C4A15A" },
-  { id: "silver", name: "星河银", swatch: "#C6CAD0" },
+  { id: "pearl", name: "珍珠白", swatch: "#F2EFEA", image: siteImages.finishPearl },
+  { id: "obsidian", name: "曜石黑", swatch: "#1A1A1C", image: siteImages.finishObsidian },
+  { id: "gold", name: "鎏光金", swatch: "#C4A15A", image: siteImages.finishGold },
+  { id: "silver", name: "星河银", swatch: "#C6CAD0", image: siteImages.finishSilver },
 ];
-
-const defaultImage = siteImages.hero;
 
 const interiors = ["亚麻", "Nappa 真皮", "Alcantara"];
 
@@ -45,13 +42,24 @@ export function ProductConfig() {
           className={`relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-card stagger-item ${isVisible ? "stagger-visible" : ""}`}
           style={{ transitionDelay: "0.1s" }}
         >
-          <ResponsiveImage
-            key={selected.id}
-            image={selected.image ?? defaultImage}
-            alt={`Aether · ${selected.name}`}
-            sizes="(min-width: 1152px) 1104px, 100vw"
-            className="w-full h-full object-contain animate-fade-in"
-          />
+          {finishes.map((finish) => {
+            const active = finish.id === selected.id;
+            return (
+              <ResponsiveImage
+                key={finish.id}
+                image={finish.image}
+                alt={active ? `Aether · ${finish.name}` : ""}
+                sizes="(min-width: 1152px) 1104px, 100vw"
+                priority={finish.id === "pearl"}
+                loading="eager"
+                decoding="async"
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out ${
+                  active ? "opacity-100" : "opacity-0"
+                }`}
+                aria-hidden={!active}
+              />
+            );
+          })}
         </div>
 
         <div
