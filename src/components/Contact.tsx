@@ -41,6 +41,25 @@ async function submitViaLegacyNotify(name: string, phone: string, message: strin
   return notifyError ? "partial" : "success";
 }
 
+const bookingFaqs = [
+  {
+    q: "预约之后呢？",
+    a: "提交后我们会尽快与你联系，说明体验时间与安排。如需直接写信，请发送至 business@sorgenx.com。",
+  },
+  {
+    q: "适合谁？",
+    a: "希望在家庭空间里完成短时恢复的人。如有明确疾病或身体不适，请先遵医嘱。",
+  },
+  {
+    q: "空间和安装？",
+    a: "Aether 为家庭空间设计。具体占地与安装要求，我们会在联系时说明。",
+  },
+  {
+    q: "安全吗？",
+    a: "Aether 是生活方式与恢复体验产品，不构成医疗诊断或治疗建议。完整说明见本页声明。",
+  },
+];
+
 export function Contact() {
   const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
@@ -140,16 +159,17 @@ export function Contact() {
 
   return (
     <section id="contact" className="section-y bg-card">
-      <div ref={ref} className="max-w-4xl mx-auto px-6">
+      <div ref={ref} className="max-w-6xl mx-auto px-6">
         <div className={`text-center max-w-3xl mx-auto mb-16 stagger-item ${isVisible ? "stagger-visible" : ""}`}>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight mb-6">
             预约体验
           </h2>
           <p className="text-xl text-muted-foreground">
-            留下联系方式，我们会尽快与你联系。
+            留下姓名和电话。我们会尽快与你联系，说明体验如何安排。
           </p>
         </div>
 
+        <div className="grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-8 lg:gap-12 items-start">
         <div
           className={`bg-background rounded-3xl p-8 lg:p-12 stagger-item ${isVisible ? "stagger-visible" : ""}`}
           style={{ transitionDelay: "0.15s" }}
@@ -273,6 +293,22 @@ export function Contact() {
               </div>
             ))}
           </div>
+        </div>
+
+        <aside
+          className={`stagger-item ${isVisible ? "stagger-visible" : ""}`}
+          style={{ transitionDelay: "0.2s" }}
+          aria-label="预约说明"
+        >
+          <dl className="space-y-8 lg:pt-4">
+            {bookingFaqs.map((item) => (
+              <div key={item.q}>
+                <dt className="text-base font-medium text-foreground">{item.q}</dt>
+                <dd className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </aside>
         </div>
       </div>
     </section>

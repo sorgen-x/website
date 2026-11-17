@@ -5,6 +5,8 @@ const footerLinks = [
     title: "产品",
     links: [
       { label: "Aether", href: "/#gallery" },
+      { label: "体验", href: "/#sensory" },
+      { label: "进舱流程", href: "/#session" },
       { label: "材质与色彩", href: "/#configure" },
     ],
   },
