@@ -8,8 +8,11 @@ import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Disclaimer } from "@/components/Disclaimer";
 import { Footer } from "@/components/Footer";
+import { HOME_PAGE_META, usePageMeta } from "@/hooks/usePageMeta";
 
 const Index = () => {
+  usePageMeta(HOME_PAGE_META);
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />

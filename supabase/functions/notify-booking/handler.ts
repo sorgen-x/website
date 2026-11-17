@@ -1,23 +1,12 @@
-import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { z } from "npm:zod@3.25.76";
+import {
+  DEFAULT_FROM,
+  bookingSchema,
+  corsHeaders,
+  formatBeijingTime,
+  sendBookingEmail,
+} from "../_shared/booking.ts";
 
-export const bookingSchema = z.object({
-  name: z.string().max(50).trim().min(1),
-  phone: z.string().regex(/^1[3-9]\d{9}$/),
-  message: z.string().max(500).optional(),
-  created_at: z.string().datetime({ offset: true }).optional(),
-}).strict();
-
-export function formatBeijingTime(date: Date): string {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Asia/Shanghai",
-    year: "numeric", month: "2-digit", day: "2-digit",
-    hour: "2-digit", minute: "2-digit", second: "2-digit",
-    hourCycle: "h23",
-  }).formatToParts(date);
-  const get = (type: string) => parts.find((part) => part.type === type)?.value ?? "";
-  return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
-}
+export { bookingSchema, formatBeijingTime };
 
 type Dependencies = {
   getEnv: (name: string) => string | undefined;
@@ -52,32 +41,23 @@ export function createHandler(dependencies: Dependencies) {
     if (!apiKey) {
       return json({ error: "邮件通知未配置：请在 Cloud Secrets 添加 RESEND_API_KEY" }, 503);
     }
-    const from = dependencies.getEnv("RESEND_FROM") || "SORGEN 预约通知 <onboarding@resend.dev>";
+    const from = dependencies.getEnv("RESEND_FROM") || DEFAULT_FROM;
     const booking = parsed.data;
     const submittedAt = booking.created_at ? new Date(booking.created_at) : dependencies.now();
 
     try {
-      const response = await dependencies.fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          from,
-          to: ["business@sorgenx.com"],
-          subject: `新预约体验：${booking.name}`,
-          text: [
-            `姓名：${booking.name}`,
-            `电话：${booking.phone}`,
-            `留言：${booking.message ?? ""}`,
-            `提交时间：${formatBeijingTime(submittedAt)}（北京时间 Asia/Shanghai）`,
-          ].join("\n"),
-        }),
+      const result = await sendBookingEmail({
+        fetch: dependencies.fetch,
+        apiKey,
+        from,
+        name: booking.name,
+        phone: booking.phone,
+        message: booking.message,
+        submittedAt,
       });
-      if (!response.ok) {
-        const details = await response.text();
-        console.warn("Resend 邮件通知失败", response.status);
-        return json({ error: "邮件服务发送失败", status: response.status, details }, response.status);
+      if (!result.ok) {
+        return json({ error: "邮件服务发送失败", status: result.status, details: result.details }, result.status);
       }
-      const result = await response.json();
       return json({ success: true, id: result.id });
     } catch {
       console.warn("Resend 邮件服务暂时无法连接");
@@ -85,3 +65,4 @@ export function createHandler(dependencies: Dependencies) {
     }
   };
 }
+

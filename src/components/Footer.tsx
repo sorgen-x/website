@@ -4,27 +4,27 @@ const footerLinks = [
   {
     title: "产品",
     links: [
-      { label: "Aether", href: "#gallery" },
-      { label: "材质与色彩", href: "#configure" },
+      { label: "Aether", href: "/#gallery" },
+      { label: "材质与色彩", href: "/#configure" },
     ],
   },
   {
     title: "服务",
     links: [
-      { label: "预约体验", href: "#contact" },
-      { label: "联系我们", href: "#contact" },
+      { label: "预约体验", href: "/#contact" },
+      { label: "联系我们", href: "/#contact" },
     ],
   },
   {
     title: "公司",
-    links: [{ label: "关于溯元", href: "#about" }],
+    links: [{ label: "关于溯元", href: "/#about" }],
   },
   {
     title: "合规",
     links: [
       { label: "隐私政策", href: "/privacy", isRoute: true },
       { label: "用户协议", href: "/terms", isRoute: true },
-      { label: "声明", href: "#disclaimer" },
+      { label: "声明", href: "/#disclaimer" },
     ],
   },
 ];

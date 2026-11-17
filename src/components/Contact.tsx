@@ -8,8 +8,16 @@ import { toast } from "@/hooks/use-toast";
 const contactInfo = [
   { icon: Building2, label: "公司", value: "深圳溯元求索智能科技有限公司" },
   { icon: Globe, label: "官网", value: "sorgenx.com" },
-  { icon: Mail, label: "商务合作", value: "business@sorgenx.com" },
+  { icon: Mail, label: "商务合作", value: "business@sorgenx.com", mailto: true },
 ];
+
+type SubmitState = "form" | "success" | "partial";
+
+function getInvokeStatus(error: unknown): number | undefined {
+  if (!error || typeof error !== "object" || !("context" in error)) return undefined;
+  const context = (error as { context?: { status?: unknown } }).context;
+  return typeof context?.status === "number" ? context.status : undefined;
+}
 
 export function Contact() {
   const { ref, isVisible } = useScrollAnimation();
@@ -18,16 +26,28 @@ export function Contact() {
     phone: "",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>("form");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const resetForm = () => {
+    setFormData({ name: "", phone: "", message: "" });
+    setHoneypot("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (honeypot.trim()) {
+      resetForm();
+      setSubmitState("success");
+      return;
+    }
 
     if (!formData.name.trim()) {
       toast({ title: "请输入姓名", variant: "destructive" });
@@ -57,31 +77,26 @@ export function Contact() {
       const phone = formData.phone.trim();
       const message = formData.message.trim();
 
-      const { error } = await supabase.from("contact_inquiries").insert({
-        name,
-        phone,
-        message: message || null,
+      const { data, error } = await supabase.functions.invoke("submit-booking", {
+        body: {
+          name,
+          phone,
+          message,
+        },
       });
 
-      if (error) throw error;
+      if (data && typeof data === "object" && "success" in data && data.success) {
+        resetForm();
+        setSubmitState((data as { notified?: boolean }).notified === false ? "partial" : "success");
+        return;
+      }
 
-      setFormData({ name: "", phone: "", message: "" });
-      setSubmitted(true);
+      if (getInvokeStatus(error) === 429) {
+        toast({ title: "提交过于频繁，请稍后再试", variant: "destructive" });
+        return;
+      }
 
-      void (async () => {
-        try {
-          const { error: notifyError } = await supabase.functions.invoke("notify-booking", {
-            body: {
-              name,
-              phone,
-              message,
-            },
-          });
-          if (notifyError) throw notifyError;
-        } catch {
-          console.warn("预约已保存，但邮件通知未发送成功。");
-        }
-      })();
+      throw error ?? new Error("submit-booking failed");
     } catch (error) {
       console.error("Submit error:", error);
       toast({
@@ -110,7 +125,7 @@ export function Contact() {
           className={`bg-background rounded-3xl p-8 lg:p-12 stagger-item ${isVisible ? "stagger-visible" : ""}`}
           style={{ transitionDelay: "0.15s" }}
         >
-          {submitted ? (
+          {submitState === "success" ? (
             <div className="py-10 text-center animate-fade-in" role="status" aria-live="polite">
               <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-foreground/15">
                 <Check className="h-5 w-5 text-foreground" strokeWidth={1.5} />
@@ -119,14 +134,50 @@ export function Contact() {
               <p className="mt-3 text-muted-foreground">我们会尽快与你联系。</p>
               <button
                 type="button"
-                onClick={() => setSubmitted(false)}
+                onClick={() => setSubmitState("form")}
+                className="mt-8 text-sm text-link underline-offset-4 hover:underline"
+              >
+                再提交一份
+              </button>
+            </div>
+          ) : submitState === "partial" ? (
+            <div className="py-10 text-center animate-fade-in" role="status" aria-live="polite">
+              <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-foreground/15">
+                <Check className="h-5 w-5 text-foreground" strokeWidth={1.5} />
+              </div>
+              <p className="text-2xl font-semibold text-foreground tracking-tight">预约已记录。</p>
+              <p className="mt-3 text-muted-foreground">
+                请求已保存，但通知可能未能送达。如无人跟进，请发送邮件至{" "}
+                <a href="mailto:business@sorgenx.com" className="text-link underline-offset-4 hover:underline">
+                  business@sorgenx.com
+                </a>
+                。
+              </p>
+              <button
+                type="button"
+                onClick={() => setSubmitState("form")}
                 className="mt-8 text-sm text-link underline-offset-4 hover:underline"
               >
                 再提交一份
               </button>
             </div>
           ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="relative space-y-6">
+            <div
+              aria-hidden="true"
+              className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+            >
+              <label htmlFor="website">网站</label>
+              <input
+                id="website"
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
             <div className="grid sm:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm text-muted-foreground mb-2">姓名 *</label>
@@ -179,7 +230,16 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">{info.label}</p>
-                  <p className="text-sm font-medium text-foreground break-all">{info.value}</p>
+                  {info.mailto ? (
+                    <a
+                      href={`mailto:${info.value}`}
+                      className="text-sm font-medium text-foreground break-all text-link underline-offset-4 hover:underline"
+                    >
+                      {info.value}
+                    </a>
+                  ) : (
+                    <p className="text-sm font-medium text-foreground break-all">{info.value}</p>
+                  )}
                 </div>
               </div>
             ))}

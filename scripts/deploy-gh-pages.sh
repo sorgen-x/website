@@ -13,6 +13,10 @@ trap 'git worktree remove --force "$work"' EXIT
   cp -r "$OLDPWD/dist/." .
   touch .nojekyll
   test "$(cat CNAME)" = "sorgenx.com"
+  if [ -e auth ] || [ -e user ] || [ -e auth.html ] || [ -e user.html ]; then
+    echo "refusing to deploy leftover auth/user shells" >&2
+    exit 1
+  fi
   git add -A
   git -c user.name="SORGEN Deploy" -c user.email="dev@sorgenx.com" commit -qm "${1:-Deploy $(git -C "$OLDPWD" rev-parse --short HEAD)}" || { echo "nothing to deploy"; exit 0; }
   git push origin gh-pages )

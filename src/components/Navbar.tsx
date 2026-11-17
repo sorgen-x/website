@@ -4,11 +4,11 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { label: "Aether", href: "#gallery" },
-  { label: "体验", href: "#sensory" },
-  { label: "小元", href: "#system" },
-  { label: "关于", href: "#about" },
-  { label: "材质", href: "#configure" },
+  { label: "Aether", href: "/#gallery" },
+  { label: "体验", href: "/#sensory" },
+  { label: "小元", href: "/#system" },
+  { label: "关于", href: "/#about" },
+  { label: "材质", href: "/#configure" },
 ];
 
 export function Navbar() {
@@ -23,13 +23,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setMobileMenuOpen(false);
-  };
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <nav
@@ -55,9 +49,9 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.label}
-                onClick={() => scrollToSection(link.href)}
+                href={link.href}
                 className={`text-sm transition-colors ${
                   isScrolled
                     ? "text-muted-foreground hover:text-foreground"
@@ -65,13 +59,13 @@ export function Navbar() {
                 }`}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </div>
 
           <div className="hidden md:flex items-center gap-2">
-            <Button variant="hero" size="sm" onClick={() => scrollToSection("#contact")}>
-              预约体验
+            <Button variant="hero" size="sm" asChild>
+              <a href="/#contact">预约体验</a>
             </Button>
           </div>
 
@@ -90,22 +84,20 @@ export function Navbar() {
           <div className="md:hidden py-4 border-t border-border/50 bg-background/95 backdrop-blur-xl">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.label}
-                  onClick={() => scrollToSection(link.href)}
+                  href={link.href}
+                  onClick={closeMobileMenu}
                   className="px-4 py-3 text-left text-foreground hover:bg-card rounded-lg transition-colors"
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
               <div className="pt-2 px-4">
-                <Button
-                  variant="hero"
-                  size="sm"
-                  className="w-full"
-                  onClick={() => scrollToSection("#contact")}
-                >
-                  预约体验
+                <Button variant="hero" size="sm" className="w-full" asChild>
+                  <a href="/#contact" onClick={closeMobileMenu}>
+                    预约体验
+                  </a>
                 </Button>
               </div>
             </div>
