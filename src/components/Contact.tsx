@@ -19,6 +19,28 @@ function getInvokeStatus(error: unknown): number | undefined {
   return typeof context?.status === "number" ? context.status : undefined;
 }
 
+// Only when submit-booking is not deployed yet (never on 4xx/5xx from a live function).
+function isFunctionMissing(error: unknown): boolean {
+  const status = getInvokeStatus(error);
+  if (status === 404) return true;
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return /not found|does not exist|ENOENT|404/i.test(message);
+}
+
+async function submitViaLegacyNotify(name: string, phone: string, message: string): Promise<"success" | "partial"> {
+  const { error: insertError } = await supabase.from("contact_inquiries").insert({
+    name,
+    phone,
+    message: message || null,
+  });
+  if (insertError) throw insertError;
+
+  const { error: notifyError } = await supabase.functions.invoke("notify-booking", {
+    body: { name, phone, message },
+  });
+  return notifyError ? "partial" : "success";
+}
+
 export function Contact() {
   const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
@@ -93,6 +115,13 @@ export function Contact() {
 
       if (getInvokeStatus(error) === 429) {
         toast({ title: "提交过于频繁，请稍后再试", variant: "destructive" });
+        return;
+      }
+
+      if (isFunctionMissing(error)) {
+        const state = await submitViaLegacyNotify(name, phone, message);
+        resetForm();
+        setSubmitState(state);
         return;
       }
 
